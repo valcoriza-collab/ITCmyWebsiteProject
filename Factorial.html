@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Factorial Analysis</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Share Tech Mono', monospace;
+    background: url('img/tem.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #00ffcc;
+    text-align: center;
+    overflow-x: hidden;
+    background-color: rgba(10, 10, 20, 0.85);
+    background-blend-mode: multiply;
+  }
+
+  .equation-symbol {
+    position: absolute;
+    font-family: Arial, sans-serif;
+    font-size: 8em;
+    font-weight: bold;
+    color: rgba(255, 153, 255, 0.2);
+    pointer-events: none;
+    animation: fade-pulse 20s linear infinite;
+    text-shadow: 0 0 10px rgba(255, 153, 255, 0.5);
+  }
+  .equation-symbol:nth-child(1) {
+    content: 'n!';
+    top: 5%;
+    left: 15%;
+    animation-delay: 0s;
+  }
+  .equation-symbol:nth-child(2) {
+    content: 'Σ';
+    top: 35%;
+    right: 10%;
+    animation-delay: 6s;
+    font-size: 10em;
+    color: rgba(0, 255, 255, 0.2);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+  .equation-symbol:nth-child(3) {
+    content: '/';
+    top: 70%;
+    left: 5%;
+    animation-delay: 12s;
+    font-size: 6em;
+  }
+  
+  @keyframes fade-pulse {
+    0% { opacity: 0; transform: scale(1); }
+    30% { opacity: 0.5; transform: scale(1.1); }
+    60% { opacity: 0; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+  }
+
+  .blinking-equation {
+    position: absolute;
+    top: 20%;
+    right: 30%;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.4em;
+    color: #ffcc00;
+    pointer-events: none;
+    animation: blink 2s step-start 0s infinite;
+    z-index: 10;
+    text-shadow: 0 0 5px #ffcc00;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
+    color: #00ffff;
+    margin-top: 60px;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px;
+  }
+
+  .card {
+    background-color: rgba(30, 30, 40, 0.9);
+    border: 1px solid #00aaff;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0,170,255,0.5);
+    width: 320px;
+    padding: 25px;
+    text-align: center;
+    animation: fadeIn 1.5s ease forwards;
+    opacity: 0;
+    color: #e0e0e0;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .card h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #00e0ff;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px rgba(0,255,255,0.7);
+  }
+
+  .icon {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #ff99ff;
+    text-shadow: 0 0 8px #ff99ff;
+  }
+
+  input {
+    width: 80%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #00aaff;
+    border-radius: 8px;
+    font-size: 1.1em;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #00ffcc;
+  }
+
+  button {
+    background-color: #00aaff;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0,170,255,0.5);
+  }
+
+  button:hover {
+    background-color: #00e0ff;
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #00e0ff;
+  }
+
+  .back-home {
+    display: inline-block;
+    margin: 50px auto 80px;
+    text-decoration: none;
+    background-color: #00aaff;
+    color: black;
+    padding: 15px 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255,153,255,0.7);
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .back-home:hover {
+    background-color: #00aaff;
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px rgba(255,204,255,1);
+  }
+
+</style>
+</head>
+
+<body>
+  <div class="equation-symbol">n!</div>
+  <div class="equation-symbol">Σ</div>
+  <div class="equation-symbol">/</div>
+  
+  <div class="blinking-equation">
+    $e^{i\pi} + 1 = 0$
+  </div>
+
+  <h1>NUMERICAL ANALYSIS ENGINE 🧪</h1>
+
+  <div class="card-container">
+    <div class="card">
+      <div class="icon">➗</div>
+      <h2>Factorial (While Loop)</h2>
+      <label>Enter Base Value:</label><br>
+      <input id="n1" type="number"><br>
+      <button onclick="computeFactorial()">Execute</button>
+      <button onclick="clearFactorial()">Reset</button><br>
+      <label>Factorial Result:</label><br>
+      <input id="factorial" type="number" readonly>
+    </div>
+
+    <div class="card">
+      <div class="icon">➕</div>
+      <h2>Summation (Do While Loop)</h2>
+      <label>Enter Upper Limit:</label><br>
+      <input id="n2" type="number"><br>
+      <button onclick="computeSum()">Execute</button>
+      <button onclick="clearSum()">Reset</button><br>
+      <label>Summation Result:</label><br>
+      <input id="sum" type="number" readonly>
+    </div>
+
+    <div class="card">
+      <div class="icon">∑</div>
+      <h2>Average (For Loop)</h2>
+      <label>Enter N (Count):</label><br>
+      <input id="n3" type="number"><br>
+      <button onclick="computeAverage()">Execute</button>
+      <button onclick="clearAverage()">Reset</button><br>
+      <label>Average Result:</label><br>
+      <input id="average" type="number" readonly>
+    </div>
+  </div>
+
+ <a class="back-home" href="Homepage.html">⬅ Access Home System</a>
+
+  <script>
+    function computeFactorial() {
+      let n = document.getElementById("n1").value * 1;
+      let result = 1;
+
+      if (n < 0 || n % 1 !== 0) {
+        document.getElementById("factorial").value = "Error";
+        return;
+      }
+
+      if (n === 0) {
+        document.getElementById("factorial").value = 1;
+        return;
+      }
+      
+      let i = n;
+      while (i > 1) {
+        result *= i;
+        i--;
+      }
+      document.getElementById("factorial").value = result;
+    }
+
+    function computeSum() {
+      let j = document.getElementById("n2").value * 1;
+      let result = 0;
+      let a = 1;
+      
+      if (j <= 0 || j % 1 !== 0) {
+        document.getElementById("sum").value = "Error";
+        return;
+      }
+      
+      do {
+        result += a;
+        a++;
+      } while (a <= j);
+      document.getElementById("sum").value = result;
+    }
+
+    function computeAverage() {
+      let k = document.getElementById("n3").value * 1;
+      let result = 0;
+      
+      if (k <= 0 || k % 1 !== 0) {
+        document.getElementById("average").value = "Error";
+        return;
+      }
+      
+      for (let b = 1; b <= k; b++) {
+        result += b;
+      }
+      let average = result / k;
+      document.getElementById("average").value = average.toFixed(2);
+    }
+
+    function clearFactorial() {
+      document.getElementById("n1").value = '';
+      document.getElementById("factorial").value = '';
+    }
+    function clearSum() {
+      document.getElementById("n2").value = '';
+      document.getElementById("sum").value = '';
+    }
+    function clearAverage() {
+      document.getElementById("n3").value = '';
+      document.getElementById("average").value = '';
+    }
+  </script>
+</body>
+</html>

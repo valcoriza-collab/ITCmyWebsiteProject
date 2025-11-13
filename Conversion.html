@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversion</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: url('img/jar.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Share Tech Mono', monospace;
+    color: #e0e0e0;
+    text-align: center;
+    overflow-x: hidden;
+  }
+
+  .cloud {
+    position: absolute;
+    top: 20%;
+    left: -200px;
+    width: 200px;
+    height: 100px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 100px;
+    animation: float 60s linear infinite;
+    filter: blur(5px);
+    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+  }
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+  }
+  .cloud::before {
+    width: 100px; height: 80px;
+    top: -20px; left: 30px;
+  }
+  .cloud::after {
+    width: 120px; height: 90px;
+    top: 10px; left: 90px;
+  }
+  @keyframes float {
+    from { transform: translateX(0); }
+    to { transform: translateX(120vw); }
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
+    color: #00ffff;
+    margin-top: 80px;
+    text-shadow: 0 0 15px #00ffff, 0 0 25px rgba(0,255,255,0.7);
+  }
+
+  .conversion-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px;
+  }
+
+  .card {
+    background-color: rgba(30, 30, 40, 0.85);
+    border: 1px solid #00ffff;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,255,255,0.4), 0 0 30px rgba(0,255,255,0.2);
+    width: 320px;
+    padding: 25px;
+    text-align: center;
+    animation: fadeIn 1.5s ease forwards;
+    opacity: 0;
+    color: #e0e0e0;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .card h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #00e0ff;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px rgba(0,255,255,0.7);
+  }
+
+  .icon {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+  }
+
+  input {
+    width: 80%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #00aaff;
+    border-radius: 8px;
+    font-size: 1.1em;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #00ffcc;
+  }
+
+  button {
+    background-color: #00aaff;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0,170,255,0.5);
+  }
+
+  button:hover {
+    background-color: #00e0ff;
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0,224,255,0.7), 0 0 25px rgba(0,224,255,0.4);
+  }
+
+  .back-home {
+    display: inline-block;
+    margin: 50px auto 80px;
+    text-decoration: none;
+    background-color: #00aaff;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,170,255,0.5);
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .back-home:hover {
+    background-color: #00e0ff;
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px rgba(0,224,255,0.7), 0 0 30px rgba(0,224,255,0.4);
+  }
+
+</style>
+</head>
+
+<body>
+  <div class="cloud" style="top:10%;animation-delay:0s;"></div>
+  <div class="cloud" style="top:30%;animation-delay:20s;opacity:0.9;"></div>
+  <div class="cloud" style="top:50%;animation-delay:40s;opacity:0.8;"></div>
+
+  <h1>Conversion⚙️</h1>
+
+  <div class="conversion-container">
+    <div class="card">
+      <div class="icon">🌡️</div>
+      <h2>Celsius // Fahrenheit</h2>
+      <label>Input Celsius:</label><br>
+      <input id="n1" type="number"><br>
+      <button onclick="computeCelsiustoFahrenheit()">Convert</button>
+      <button onclick="clearvaluesCtF()">Reset</button><br>
+      <label>Output Fahrenheit:</label><br>
+      <input id="fahrenheit" type="number" readonly>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌡️</div>
+      <h2>Fahrenheit // Celsius</h2>
+      <label>Input Fahrenheit:</label><br>
+      <input id="n2" type="number"><br>
+      <button onclick="computeFahrenheittoCelsius()">Convert</button>
+      <button onclick="clearvaluesFtC()">Reset</button><br>
+      <label>Output Celsius:</label><br>
+      <input id="celsius" type="number" readonly>
+    </div>
+
+    <div class="card">
+      <div class="icon">📏</div>
+      <h2>Meters // Feet</h2>
+      <label>Input Meters:</label><br>
+      <input id="n3" type="number"><br>
+      <button onclick="computeMeterstoFeet()">Convert</button>
+      <button onclick="clearvaluesMtFt()">Reset</button><br>
+      <label>Output Feet:</label><br>
+      <input id="feet" type="number" readonly>
+    </div>
+
+    <div class="card">
+      <div class="icon">📐</div>
+      <h2>Feet // Meters</h2>
+      <label>Input Feet:</label><br>
+      <input id="n4" type="number"><br>
+      <button onclick="computeFeettoMeters()">Convert</button>
+      <button onclick="clearvaluesFttoM()">Reset</button><br>
+      <label>Output Meters:</label><br>
+      <input id="meters" type="number" readonly>
+    </div>
+  </div>
+
+  <a class="back-home" href="Homepage.html">⬅ Access Home System</a>
+
+  <script>
+    function computeCelsiustoFahrenheit() {
+      var c = document.getElementById("n1").value * 1;
+      let f  = (c * 9/5) + 32;
+      document.getElementById("fahrenheit").value = f.toFixed(2);
+    }
+
+    function computeFahrenheittoCelsius() {
+      var f = document.getElementById("n2").value * 1;
+      let c  = (f - 32) * 5/9;
+      document.getElementById("celsius").value = c.toFixed(2);
+    }
+
+    function computeMeterstoFeet() {
+      var m = document.getElementById("n3").value * 1;
+      let ft  = m * 3.281;
+      document.getElementById("feet").value = ft.toFixed(2);
+    }
+
+    function computeFeettoMeters() {
+      var ft = document.getElementById("n4").value * 1;
+      let m  = ft / 3.281;
+      document.getElementById("meters").value = m.toFixed(2);
+    }
+
+    function clearvaluesCtF() {
+      document.getElementById("n1").value = '';
+      document.getElementById("fahrenheit").value = '';
+    }
+    function clearvaluesFtC() {
+      document.getElementById("n2").value = '';
+      document.getElementById("celsius").value = '';
+    }
+    function clearvaluesMtFt() {
+      document.getElementById("n3").value = '';
+      document.getElementById("feet").value = '';
+    }
+    function clearvaluesFttoM() {
+      document.getElementById("n4").value = '';
+      document.getElementById("meters").value = '';
+    }
+  </script>
+</body>
+</html>
